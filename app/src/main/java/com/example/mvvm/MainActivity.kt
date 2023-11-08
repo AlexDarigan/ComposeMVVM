@@ -27,7 +27,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,20 +50,20 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatApp(modifier: Modifier = Modifier) {
-    var messages = remember { mutableStateListOf("Hello", "World", "Davy") }
+    val messages = remember { mutableStateListOf("Hello", "World", "Davy") }
     var message by remember { mutableStateOf(""); }
     val focusManager = LocalFocusManager.current
 
-    var onSendPressed = {
+    val onSendPressed = {
         messages.add(message)
         message = ""
-        focusManager.clearFocus();
+        focusManager.clearFocus()
     }
 
-    var onTextInput = { input: String ->
+    val onTextInput = { input: String ->
         message = input
     }
 
